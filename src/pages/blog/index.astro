@@ -13,6 +13,7 @@ if (supabase) {
     .order("published_at", { ascending: false, nullsFirst: false });
 
   if (error) {
+    console.error("Supabase blog query failed:", error.message);
     errorMessage = "Blog posts are temporarily unavailable.";
   } else {
     posts = data ?? [];
