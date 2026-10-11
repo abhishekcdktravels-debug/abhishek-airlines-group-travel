@@ -1,0 +1,62 @@
+
+---
+import { supabase } from "../../lib/supabase";
+
+let airlines = [];
+let errorMessage = "";
+
+if (supabase) {
+  const { data, error } = await supabase
+    .from("airlines")
+    .select("name, slug, description")
+    .eq("published", true)
+    .order("name");
+
+  if (error) {
+    errorMessage = "Airline information is temporarily unavailable.";
+  } else {
+    airlines = data ?? [];
+  }
+} else {
+  errorMessage = "Airline information is temporarily unavailable.";
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Airline Group Travel Directory</title>
+    <meta
+      name="description"
+      content="Explore airline group travel guides and flight-planning information."
+    />
+  </head>
+  <body>
+    <main>
+      <a href="/">← Home</a>
+      <h1>Airline Group Travel Directory</h1>
+      <p>Explore our airline guides to help plan your next group journey.</p>
+
+      {errorMessage ? (
+        <p>{errorMessage}</p>
+      ) : airlines.length > 0 ? (
+        <ul>
+          {airlines.map((airline) => (
+            <li>
+              <h2>
+                <a href={`/airlines/${airline.slug}`}>
+                  {airline.name}
+                </a>
+              </h2>
+              <p>{airline.description}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No airline guides have been published yet.</p>
+      )}
+    </main>
+  </body>
+</html>
