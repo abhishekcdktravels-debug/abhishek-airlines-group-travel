@@ -250,6 +250,119 @@ if (supabase) {
       </section>
     </main>
 
+<section id="latest-blog" class="latest-blog">
+  <div class="blog-heading">
+    <p class="blog-eyebrow">TRAVEL INSPIRATION</p>
+    <h2>Latest from Our Blog</h2>
+    <p>Discover helpful travel tips, planning advice, and the latest articles.</p>
+  </div>
+
+  {posts.length > 0 ? (
+    <div class="blog-grid">
+      {posts.map((post) => (
+        <article class="blog-card">
+          {post.featured_image_url && (
+            <img
+              src={post.featured_image_url}
+              alt={post.title}
+              loading="lazy"
+            />
+          )}
+          <div class="blog-card-content">
+            <h3><a href={`/blog/${post.slug}`}>{post.title}</a></h3>
+            <p>{post.excerpt}</p>
+            <a class="blog-read-more" href={`/blog/${post.slug}`}>
+              Read Article →
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  ) : (
+    <p class="blog-empty">Our articles are coming soon. Please check back later!</p>
+  )}
+
+  <a class="blog-view-all" href="/blog">Explore All Articles →</a>
+</section>
+
+<style>
+  .latest-blog {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 76px 24px;
+  }
+
+  .blog-heading {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .blog-eyebrow {
+    color: #087fc1;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+
+  .blog-heading h2 {
+    color: #123966;
+    font-size: clamp(28px, 4vw, 38px);
+    margin: 12px 0;
+  }
+
+  .blog-heading > p:last-child,
+  .blog-card-content > p,
+  .blog-empty {
+    color: #64748b;
+    line-height: 1.7;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+
+  .blog-card {
+    border: 1px solid #e5ebf2;
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+  }
+
+  .blog-card img {
+    display: block;
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+  }
+
+  .blog-card-content {
+    padding: 22px;
+  }
+
+  .blog-card h3 {
+    color: #123966;
+    line-height: 1.4;
+  }
+
+  .blog-read-more,
+  .blog-view-all {
+    color: #087fc1;
+    font-weight: 700;
+  }
+
+  .blog-view-all {
+    display: inline-block;
+    margin-top: 30px;
+  }
+
+  .blog-empty {
+    text-align: center;
+    padding: 24px 0;
+  }
+</style>
+
     <footer>
       <div class="container">
         <a class="logo" href="/" style="color:white">
