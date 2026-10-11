@@ -9,8 +9,7 @@ const airlines = [
   { name: "Lufthansa", slug: "lufthansa" }
 ];
 
-let posts = [];
-
+let posts: any[] = [];
 if (supabase) {
   const { data, error } = await supabase
     .from("blog_posts")
