@@ -1,0 +1,247 @@
+
+---
+const airlines = [
+  { name: "Air Canada", slug: "air-canada" },
+  { name: "British Airways", slug: "british-airways" },
+  { name: "Emirates", slug: "emirates" },
+  { name: "Lufthansa", slug: "lufthansa" }
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#102c52" />
+    <meta name="description" content="Explore airline group travel options, discover airline information, and submit an inquiry for your next group journey." />
+    <title>Group Flight Travel | Plan Your Journey Together</title>
+    <style>
+      :root {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #172b45;
+        background: #fff;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+      }
+
+      * { box-sizing: border-box; }
+      body { margin: 0; }
+      a { color: inherit; text-decoration: none; }
+      .container { width: min(1120px, 90%); margin: auto; }
+
+      header {
+        background: white;
+        border-bottom: 1px solid #e5ebf2;
+      }
+
+      nav {
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .logo { font-size: 21px; font-weight: 800; color: #123966; }
+      .logo span { color: #1689c9; }
+      .links { display: flex; gap: 24px; align-items: center; font-size: 14px; }
+      .button {
+        display: inline-block;
+        background: #087fc1;
+        color: white;
+        padding: 14px 20px;
+        border-radius: 7px;
+        font-weight: 700;
+      }
+
+      .hero {
+        color: white;
+        background:
+          linear-gradient(90deg, rgba(9, 32, 62, .94), rgba(9, 32, 62, .62)),
+          url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1800&q=85")
+          center/cover;
+        padding: 100px 0 110px;
+      }
+
+      .eyebrow {
+        color: #9cddff;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-size: 12px;
+      }
+
+      h1 {
+        max-width: 700px;
+        font-size: clamp(38px, 6vw, 66px);
+        line-height: 1.08;
+        margin: 20px 0;
+      }
+
+      .hero p { max-width: 570px; color: #e1ebf6; line-height: 1.8; }
+      .hero .button { margin-top: 18px; }
+      section { padding: 72px 0; }
+      .section-title { font-size: 32px; margin: 0 0 12px; }
+      .intro { color: #617187; line-height: 1.8; max-width: 650px; }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 30px;
+      }
+
+      .card {
+        border: 1px solid #e1e8f0;
+        border-radius: 12px;
+        padding: 24px;
+        background: white;
+      }
+
+      .card h3 { margin-top: 0; }
+      .card p { color: #65758a; line-height: 1.7; font-size: 14px; }
+      .card a { color: #087fc1; font-weight: 700; font-size: 14px; }
+
+      .soft { background: #f4f8fc; }
+      .cta {
+        background: #102c52;
+        color: white;
+        border-radius: 16px;
+        padding: 38px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .cta p { color: #d4e1f0; line-height: 1.7; }
+      footer { background: #0b203b; color: #d6e1ef; padding: 32px 0; }
+      footer p { font-size: 13px; line-height: 1.8; }
+
+      @media (max-width: 760px) {
+        nav { flex-wrap: wrap; padding: 18px 0; }
+        .links { flex-wrap: wrap; gap: 14px; }
+        .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .hero { padding: 72px 0; }
+        .cta { align-items: flex-start; flex-direction: column; }
+      }
+
+      @media (max-width: 450px) {
+        .grid { grid-template-columns: 1fr; }
+        .links { font-size: 13px; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav class="container" aria-label="Main navigation">
+        <a class="logo" href="/">Group<span>Flight</span></a>
+        <div class="links">
+          <a href="/">Home</a>
+          <a href="#airlines">Airlines</a>
+          <a href="#benefits">Why Us</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+          <div class="eyebrow">Better journeys begin together</div>
+          <h1>Group Travel Made Simpler</h1>
+          <p>
+            Explore airline options for corporate trips, family holidays,
+            events, and group adventures. Find useful travel information
+            to help plan your next journey.
+          </p>
+          <a class="button" href="#contact">Plan Your Group Trip →</a>
+        </div>
+      </section>
+
+      <section id="airlines">
+        <div class="container">
+          <h2 class="section-title">Explore Airline Options</h2>
+          <p class="intro">
+            Discover airline information and explore group travel
+            possibilities for your next destination.
+          </p>
+
+          <div class="grid">
+            {airlines.map((airline) => (
+              <article class="card">
+                <h3>{airline.name}</h3>
+                <p>
+                  Explore airline information and group travel
+                  planning details.
+                </p>
+                <a href={`/airlines/${airline.slug}`}>
+                  Explore airline →
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="benefits" class="soft">
+        <div class="container">
+          <h2 class="section-title">Plan Together With Confidence</h2>
+          <p class="intro">
+            Organizing a group journey involves coordinating passengers,
+            destinations, schedules, and travel requirements.
+            Our website aims to make that research easier.
+          </p>
+
+          <div class="grid">
+            <article class="card">
+              <h3>Airline Research</h3>
+              <p>Review airline information before choosing your travel options.</p>
+            </article>
+            <article class="card">
+              <h3>Group Planning</h3>
+              <p>Organize the key details of your group's upcoming journey.</p>
+            </article>
+            <article class="card">
+              <h3>Travel Resources</h3>
+              <p>Find useful guidance for coordinating multiple travelers.</p>
+            </article>
+            <article class="card">
+              <h3>Inquiry Support</h3>
+              <p>Prepare your travel requirements for a group travel inquiry.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="container">
+          <div class="cta">
+            <div>
+              <h2>Planning a Group Journey?</h2>
+              <p>Start organizing your trip by preparing your travel requirements.</p>
+            </div>
+            <a class="button" href="mailto:travel@example.com">
+              Contact Us
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <a class="logo" href="/" style="color:white">
+          Group<span>Flight</span>
+        </a>
+        <p>
+          An independent group travel information website.
+          Airline names are used for informational purposes.
+        </p>
+        <p>© {new Date().getFullYear()} GroupFlight. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
