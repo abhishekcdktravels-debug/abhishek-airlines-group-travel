@@ -1,0 +1,69 @@
+
+---
+import { supabase } from "../../lib/supabase";
+
+let posts = [];
+let errorMessage = "";
+
+if (supabase) {
+  const { data, error } = await supabase
+    .from("blog_posts")
+    .select("title, slug, excerpt, featured_image_url, published_at, created_at")
+    .eq("published", true)
+    .order("published_at", { ascending: false, nullsFirst: false });
+
+  if (error) {
+    errorMessage = "Blog posts are temporarily unavailable.";
+  } else {
+    posts = data ?? [];
+  }
+} else {
+  errorMessage = "Blog posts are temporarily unavailable.";
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Blog | GroupFlight</title>
+    <meta
+      name="description"
+      content="Read our latest travel articles, tips, and group flight planning guides."
+    />
+  </head>
+  <body>
+    <main>
+      <p><a href="/">Home</a> / Blog</p>
+      <h1>Our Blog</h1>
+      <p>Explore travel insights, useful tips, and planning guides.</p>
+
+      {errorMessage ? (
+        <p>{errorMessage}</p>
+      ) : posts.length > 0 ? (
+        <div>
+          {posts.map((post) => (
+            <article>
+              {post.featured_image_url && (
+                <img
+                  src={post.featured_image_url}
+                  alt={post.title}
+                  width="600"
+                  loading="lazy"
+                />
+              )}
+              <h2>
+                <a href={`/blog/${post.slug}`}>{post.title}</a>
+              </h2>
+              <p>{post.excerpt}</p>
+              <a href={`/blog/${post.slug}`}>Read article →</a>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <p>No blog posts have been published yet. Please check back soon!</p>
+      )}
+    </main>
+  </body>
+</html>
