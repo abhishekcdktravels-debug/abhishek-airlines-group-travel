@@ -1,12 +1,30 @@
 
 ---
+import { supabase } from "../lib/supabase";
+
 const airlines = [
   { name: "Air Canada", slug: "air-canada" },
   { name: "British Airways", slug: "british-airways" },
   { name: "Emirates", slug: "emirates" },
   { name: "Lufthansa", slug: "lufthansa" }
 ];
+
+let posts = [];
+
+if (supabase) {
+  const { data, error } = await supabase
+    .from("blog_posts")
+    .select("title, slug, excerpt, featured_image_url, published_at, created_at")
+    .eq("published", true)
+    .order("published_at", { ascending: false, nullsFirst: false })
+    .limit(3);
+
+  if (!error) {
+    posts = data ?? [];
+  }
+}
 ---
+
 
 <!doctype html>
 <html lang="en">
