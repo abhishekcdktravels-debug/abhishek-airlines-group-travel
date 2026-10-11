@@ -19,6 +19,7 @@ if (supabase) {
     posts = data ?? [];
   }
 } else {
+  console.error("Supabase client is not configured. Check Netlify environment variables.");
   errorMessage = "Blog posts are temporarily unavailable.";
 }
 ---
